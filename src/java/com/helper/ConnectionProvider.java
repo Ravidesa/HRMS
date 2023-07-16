@@ -7,10 +7,7 @@ package com.helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- *
- * @author RAVI DESAI
- */
+
 public class ConnectionProvider {
     private static Connection con;
 

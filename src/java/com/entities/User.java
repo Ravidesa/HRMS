@@ -8,16 +8,21 @@ import java.sql.Timestamp;
 
 public class User {
     private int id;
-    private String username;
+   
+    private String fname;
+    private String lname;
     private String email;
     private String password;
     private String gender;
-    private Timestamp createdAccount;
     private String role;
+    private int status;
+    
+    private Timestamp createdAccount;
 
-    public User(int id, String username, String email, String password, String gender, Timestamp createdAccount, String role) {
+    public User(int id, String fname, String lname, String email, String password, String gender, Timestamp createdAccount, String role) {
         this.id = id;
-        this.username = username;
+        this.fname = fname;
+        this.lname = lname;
         this.email = email;
         this.password = password;
         this.gender = gender;
@@ -25,16 +30,27 @@ public class User {
         this.role = role;
     }
     
+
+  
     public User(){
         
     }
 
-    public User(String username, String email, String password,  String gender,String role) {
-        this.username = username;
+    public User(String fname, String lname, String email, String password, String gender, String role) {
+        this.fname = fname;
+        this.lname = lname;
         this.email = email;
         this.password = password;
         this.gender = gender;
         this.role = role;
+    }
+    
+    public User(int id, String fname, String lname, String email, String gender) {
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.gender = gender;
     }
     
     public void setId(int id) {
@@ -45,14 +61,22 @@ public class User {
         return id;
     }
     
-    public void setUsername(String username) {
-        this.username = username;
+    public String getFname() {
+        return fname;
     }
-    
-    public String getUsername() {
-        return username;
+
+    public void setFname(String fname) {
+        this.fname = fname;
     }
-       
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+      
     public void setEmail(String email) {
         this.email = email;
     }
@@ -92,4 +116,15 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+
+    
 }
