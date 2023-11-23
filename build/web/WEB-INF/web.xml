@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>Registration</servlet-name>
-        <servlet-class>com.servlet.Registration</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.servlet.LoginServlet</servlet-class>
     </servlet>
@@ -13,17 +9,77 @@
         <servlet-class>com.servlet.AllEmployee</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddUser</servlet-name>
-        <servlet-class>com.servlet.AddUser</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.servlet.LogoutServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Registration</servlet-name>
-        <url-pattern>/Registration</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddSampleUser</servlet-name>
+        <servlet-class>com.servlet.AddSampleUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPass</servlet-name>
+        <servlet-class>com.servlet.ForgotPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JustCheck</servlet-name>
+        <servlet-class>com.servlet.JustCheck</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>com.servlet.UpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEmployeeServlet</servlet-name>
+        <servlet-class>com.servlet.DeleteEmployeeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteHrServlet</servlet-name>
+        <servlet-class>com.servlet.DeleteHrServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyLeave</servlet-name>
+        <servlet-class>com.servlet.ApplyLeave</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStatus</servlet-name>
+        <servlet-class>com.servlet.UpdateStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateLeaveApply</servlet-name>
+        <servlet-class>com.servlet.UpdateLeaveApply</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageProfile</servlet-name>
+        <servlet-class>com.servlet.ManageProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateReasonLeave</servlet-name>
+        <servlet-class>com.servlet.UpdateReasonLeave</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteLeaveServlet</servlet-name>
+        <servlet-class>com.servlet.DeleteLeaveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActiveDeactiveUserServlet</servlet-name>
+        <servlet-class>com.servlet.ActiveDeactiveUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkPunchIn</servlet-name>
+        <servlet-class>com.servlet.checkPunchIn</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PunchData</servlet-name>
+        <servlet-class>com.servlet.PunchData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkPunchInHr</servlet-name>
+        <servlet-class>com.servlet.checkPunchInHr</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <servlet-class>com.servlet.AttendanceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -33,12 +89,76 @@
         <url-pattern>/AllEmployee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AddUser</servlet-name>
-        <url-pattern>/AddUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSampleUser</servlet-name>
+        <url-pattern>/AddSampleUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPass</servlet-name>
+        <url-pattern>/ForgotPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JustCheck</servlet-name>
+        <url-pattern>/JustCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/UpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEmployeeServlet</servlet-name>
+        <url-pattern>/DeleteEmployeeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteHrServlet</servlet-name>
+        <url-pattern>/DeleteHrServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyLeave</servlet-name>
+        <url-pattern>/ApplyLeave</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStatus</servlet-name>
+        <url-pattern>/UpdateStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateLeaveApply</servlet-name>
+        <url-pattern>/UpdateLeaveApply</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageProfile</servlet-name>
+        <url-pattern>/ManageProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateReasonLeave</servlet-name>
+        <url-pattern>/UpdateReasonLeave</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteLeaveServlet</servlet-name>
+        <url-pattern>/DeleteLeaveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActiveDeactiveUserServlet</servlet-name>
+        <url-pattern>/ActiveDeactiveUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkPunchIn</servlet-name>
+        <url-pattern>/checkPunchIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PunchData</servlet-name>
+        <url-pattern>/PunchData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkPunchInHr</servlet-name>
+        <url-pattern>/checkPunchInHrServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <url-pattern>/AttendanceServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

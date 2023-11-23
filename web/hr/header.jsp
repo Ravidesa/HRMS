@@ -1,7 +1,7 @@
 
 <%@page import="com.entities.User,com.entities.Message" %>
 <%@page import="java.sql.*,java.util.*,com.helper.ConnectionProvider,java.sql.*,java.util.*" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% 
     User user=(User)session.getAttribute("currentUser"); 
     if(user == null){
@@ -20,6 +20,11 @@
         <link rel="stylesheet" href="../assets/vendors/chartjs/Chart.min.css">
         <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
         <link rel="stylesheet" href="../assets/css/app.css">
+
+        <!--for sweet alert-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css">
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <style type="text/css">
             .notif:hover {
@@ -28,7 +33,88 @@
             .dataTable-sorter{
                 color: #827e8c;
             }
+            .addButton{
+                position: absolute;
+                top:18px;
+                /*padding-right: 10px;*/
+                left:370px;
+            }
         </style>
+        <style>
+            .dropdownForStatus {
+                position: relative;
+                display: inline-block;
+                width: 200px;
+            }
+
+            /* Style for the dropdown button */
+            .dropdownForStatus select {
+                width: 55%;
+                padding: 8px;
+                font-size: 16px;
+                border: none;
+                border-radius: 4px;
+                background-color: #f1f1f1;
+                color: #333;
+                cursor: pointer;
+            }
+
+            /* Style for the dropdown options */
+            .dropdownForStatus select option {
+                padding: 8px;
+            }
+
+
+            /* Custom color styles for options */
+            .dropdownForStatus select option.approved {
+                background-color: #D4EDDA;
+                color: #28A745;
+            }
+
+            .dropdownForStatus select option.rejected {
+                background-color: #F8D7DA;
+                color: #DC3545;
+            }
+
+            .dropdownForStatus select option.pending {
+                background-color: #FFF3CD;
+                color: #FFA500;
+            }
+        </style>
+        <!--for activate current link-->
+        <script>
+            $(document).ready(function () {
+                // Get the current page URL
+                var url = window.location.href;
+
+                // Remove trailing slash if present
+                url = url.replace(/\/$/, "");
+
+                // Get all the <a> tags within the navigation menu
+                var menuLinks = $(".menu a.sidebar-link");
+
+                // Get the "Settings" link element
+                var settingsLink = $("#settings-link");
+                
+                
+                // Iterate over each menu link
+                menuLinks.each(function () {
+                    var link = $(this);
+                    var linkHref = link.attr("href");
+
+                    if(url.indexOf(settingsLink.attr("href")) > -1){
+                         settingsLink.closest("li.sidebar-item").addClass("active");
+                         return false;
+                    }
+                    // Check if the current page URL matches the link's href
+                    if (url.indexOf(linkHref) > -1 || linkHref.indexOf("emp_manage_all_leave.jsp") > -1 ) {
+                        // Add the active class to the parent <ul> tag
+                        link.closest("li.sidebar-item").addClass("active");
+                        return false; // Exit the loop
+                    }
+                });
+            });
+        </script>
     </head>
 
     <body>
@@ -36,98 +122,88 @@
             <div id="sidebar" class='active'>
                 <div class="sidebar-wrapper active">
                     <div class="sidebar-header" style="height: 50px;margin-top: -30px">
-                        <i class="fa fa-users text-success me-4"></i>
-                        <span>HRMS</span>
+                        <!--<i class="fa fa-users text-success me-4"></i>-->
+                        <img src="../images/bsPng.png" style="width: 22%;"/>
+                        <span>BS-HRM</span>
                     </div>
                     <div class="sidebar-menu">
                         <ul class="menu">
-                            <li class="sidebar-item active ">
-                                <a href="index.html" class='sidebar-link'>
-                                    <i class="fa fa-home text-success"></i>
+                            <li class="sidebar-item">
+                                <a href="index.jsp" class='sidebar-link'>
+                                    <i class="fa fa-home text-info"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="fa fa-building text-success"></i>
-                                    <span>Skills & Qualification</span>
-                                </a>
-                                <ul class="submenu ">
-                                    <li>
-                                        <a href="add_skill.jsp">Add Skill</a>
-                                    </li>
-                                    <li>
-                                        <a href="manage_department.html">Manage Department</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="fa fa-users text-success"></i>
+                            
+                            <li class="sidebar-item">
+                                <a href="manage_employee.jsp" class='sidebar-link'>
+                                    <i class="fa fa-users text-info"></i>
                                     <span>Employees</span>
                                 </a>
-                                <ul class="submenu ">
-                                    <li>
-                                        <a href="add_employee.jsp">Add Employee</a>
-                                    </li>
-                                    <li>
-                                        <a href="manage_employee.jsp">Manage Employee</a>
-                                    </li>
-                                </ul>
                             </li>
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="fa fa-table text-success"></i>
-                                    <span>Leave Type</span>
+                            
+                            
+                            
+                            <li class="sidebar-item">
+                                <a href="leave_apply_hr.jsp" class='sidebar-link'>
+                                    <i class="fa fa-calendar text-info"></i>
+                                    <span>Leave Apply</span>
                                 </a>
-                                <ul class="submenu ">
-                                    <li>
-                                        <a href="add_leave_type.html">Add Leave Type</a>
-                                    </li>
-                                    <li>
-                                        <a href="manage_leave_type.html">Manage Leave Type</a>
-                                    </li>
-                                </ul>
                             </li>
+
                             <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="fa fa-table text-success"></i>
+                                <a href="emp_manage_all_leave.jsp" class='sidebar-link' id="manage_leave">
+                                    <i class="fa fa-calendar text-info"></i>
                                     <span>Leave Management</span>
                                 </a>
-                                <ul class="submenu ">
+
+                                <ul class="submenu">
                                     <li>
-                                        <a href="all_leave.html">All Leaves</a>
+                                        <a href="emp_manage_all_leave.jsp"><i class="far fa-circle text-info"></i> All Leaves</a>
                                     </li>
                                     <li>
-                                        <a href="pending_leave.html">Pending Leaves</a>
+                                        <a href="emp_manage_pending_leave.jsp"><i class="far fa-circle text-warning"></i> Pending Leaves</a>
                                     </li>
                                     <li>
-                                        <a href="approve_leave.html">Approve Leaves</a>
+                                        <a href="emp_manage_approved_leave.jsp"> <i class="far fa-circle text-success"></i> Approve Leaves</a>
                                     </li>
                                     <li>
-                                        <a href="not_approve_leave.html">Not Approve Leaves</a>
+                                        <a href="emp_manage_rejected_leave.jsp"><i class="far fa-circle text-danger"></i> Rejected Leaves</a>
                                     </li>
                                 </ul>
+
                             </li>
-                            <li class="sidebar-item  has-sub">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="fa fa-user text-success"></i>
-                                    <span>Users</span>
+                            
+                            <li class="sidebar-item">
+                                <a href="../checkPunchInHr?userId=<%= user.getId()%>" method="post" class='sidebar-link'>
+                                    <i class="fa fa-users text-info"></i>
+                                    <span>Attendance</span>
+                                </a>
+                            </li>
+
+
+                            <li class="sidebar-item">
+                                <a href="sampleEmpAttendance.jsp" class='sidebar-link'>
+                                    <i class="fa fa-users text-info"></i>
+                                    <span>Employees Attendance</span>
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            <li class="sidebar-item has-sub">
+                                <a href="manage_profile.jsp" class='sidebar-link' id="settings-link">
+                                    <i class="fa fa-cog fa-spin text-info"></i>
+                                    <span>Settings</span>
                                 </a>
                                 <ul class="submenu ">
                                     <li>
-                                        <a href="add_user.jsp">Add User</a>
+                                        <a href="manage_profile.jsp">Account</a>
                                     </li>
                                     <li>
-                                        <a href="manage_user.html">Manage Users</a>
+                                        <a href="../LogoutServlet">Logout</a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li class="sidebar-item ">
-                                <a href="reports.html" class='sidebar-link'>
-                                    <i class="fa fa-chart-bar text-success"></i>
-                                    <span>Reports</span>
-                                </a>
                             </li>
                         </ul>
                     </div>
@@ -142,49 +218,17 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
-                            <li class="dropdown nav-icon">
-                                <a href="#" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                    <div class="d-lg-inline-block">
-                                        <i data-feather="bell"></i><span class="badge bg-info">2</span>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
-                                    <h6 class='py-2 px-4'>Notifications</h6>
-                                    <ul class="list-group rounded-none">
-                                        <li class="list-group-item border-0 align-items-start">
-                                            <div class="row mb-2">
-                                                <div class="col-md-12 notif">
-                                                    <a href="leave_details.html">
-                                                        <h6 class='text-bold'>John Doe</h6>
-                                                        <p class='text-xs'>
-                                                            applied for leave at 05-21-2021
-                                                        </p>
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-12 notif">
-                                                    <a href="leave_details.html">
-                                                        <h6 class='text-bold'>Jane Doe</h6>
-                                                        <p class='text-xs'>
-                                                            applied for leave at 05-21-2021
-                                                        </p>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                            
                             <li class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                                     <div class="avatar me-1">
                                         <img src="../assets/images/admin.png" alt="" srcset="">
                                     </div>
-                                    <div class="d-none d-md-block d-lg-inline-block">Hi, <%= user.getUsername() %></div>
+                                    <div class="d-none d-md-block d-lg-inline-block">Hi, <%= user.getFname() +" "+ user.getLname() %> </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a class="dropdown-item" href="manage_profile.jsp"><i data-feather="user"></i> Account</a>
-                                    <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                    <div class="dropdown-divider"></div>
+                                        <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="../LogoutServlet"><i data-feather="log-out"></i> Logout</a>
                                 </div>
                             </li>

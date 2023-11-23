@@ -40,11 +40,11 @@ public class LoginServlet extends HttpServlet {
             session.setMaxInactiveInterval(86400);
             
             if (u.getRole().equals("EMPLOYEE")) {
-                response.sendRedirect("employee_dashboard.jsp");
+                response.sendRedirect("emp/index.jsp?id="+u.getId());
             } else if (u.getRole().equals("HR")) {
                 response.sendRedirect("hr/index.jsp?id="+u.getId());
             } else if (u.getRole().equals("SA")) {
-                response.sendRedirect("admin_dashboard.jsp");
+                response.sendRedirect("super_admin/index.jsp?id="+u.getId());
             }
         } else {
             Message msg = new Message("Inavalid Details ! Try again", "error", "alert-danger");
@@ -57,31 +57,16 @@ public class LoginServlet extends HttpServlet {
     private boolean isValidCredentials(String userEmail, String pass) {
         UserDAO dao = new UserDAO(ConnectionProvider.getConnection());
         User u = dao.getUserEmailAndPassword(userEmail,pass);
-        System.out.println(u);
+//        System.out.println(u);
         if(u == null || !pass.equals(u.getPassword())) {
-            System.out.println("nullll");
-            
+            System.out.println("login servlet page getting nullll");
             return false;    
         } else {
-            System.out.println("getting.....");
+//            System.out.println("getting.....");
             return true;
         }
         
     }
-
-//    private User getUserRole(String userEmail) {
-//        UserDAO dao = new UserDAO(ConnectionProvider.getConnection());
-//        User u = dao.getUserRole(userEmail);
-//
-//        if (u.getRole().equals("EMPLOYEE")) {
-//            return u;
-//        } else if (u.getRole().equals("HR")) {
-//            return u;
-//        } else if (u.getRole().equals("SA")) {
-//            return u;
-//        }
-//        return u;
-//    }
 
     @Override
     public String getServletInfo() {
